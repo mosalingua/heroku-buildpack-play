@@ -83,6 +83,24 @@ $PLAY_PATH/play version | sed -u 's/^/       /'
 APP_DIR=./
 echo "       Building Play! application at directory $APP_DIR"
 
+echo "full play path: $PLAY_PATH/play"
+
+#save current directory
+CURR_DIR=`pwd`
+
+echo "current working directoy:  $CURR_DIR"
+echo "cleaning old dependencies"
+
+#go to app directoy and execute play clean and deps --sync
+cd $APP_DIR
+ls -al
+pwd
+$PLAY_PATH/play clean 
+$PLAY_PATH/play deps --sync
+
+#go back to where it was
+cd $CURR_DIR
+
 DEPENDENCIES_CMD="$PLAY_PATH/play dependencies $APP_DIR --forProd --forceCopy --silent -Duser.home=$BUILD_DIR 2>&1"
 echo "       Resolving dependencies: $DEPENDENCIES_CMD"
 eval "$DEPENDENCIES_CMD" | sed -u 's/^/       /'
