@@ -106,8 +106,8 @@ echo ""
 echo "--------------------------------"
 #go back to where it was
 cd $CURR_DIR
-
-DEPENDENCIES_CMD="$PLAY_PATH/play dependencies $APP_DIR --forProd --forceCopy --silent -Duser.home=$BUILD_DIR 2>&1"
+#--forProd --forceCopy --silent
+DEPENDENCIES_CMD="$PLAY_PATH/play dependencies $APP_DIR --sync -Duser.home=$BUILD_DIR 2>&1"
 echo "       Resolving dependencies: $DEPENDENCIES_CMD"
 eval "$DEPENDENCIES_CMD" | sed -u 's/^/       /'
 check_compile_status
